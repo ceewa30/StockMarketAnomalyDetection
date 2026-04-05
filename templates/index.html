@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Anomaly Dashboard</title>
+    <script src="https://plot.ly"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Stock Anomaly Detection</h1>
+    <form method="POST">
+        <input type="text" name="ticker" value="{{ ticker }}">
+        <button type="submit">Analyze</button>
+    </form>
+    <div id="chart-container"></div>
+    <script type="text/javascript">
+        // Use the '| safe' filter so Jinja doesn't mess up the JSON quotes
+        var graphs = JSON.parse('{{ graphJSON | safe }}');
+        // console.log(graphs);
+        // Render the plot
+        Plotly.newPlot('chart-container', graphs.data, graphs.layout || {});
+    </script>
+</body>
+</html>
