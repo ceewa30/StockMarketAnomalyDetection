@@ -72,9 +72,11 @@ def index():
     interval="30m"
     if request.method == 'POST':
         ticker = request.form.get('ticker', 'AAPL').upper()
+        period = request.form.get('period', '1mo')
+        interval = request.form.get('interval', '30m')
 
     graphJSON, total_count, normal_count, anomaly_count = get_anomaly_data(ticker, period, interval)
-    return render_template('index.html', graphJSON=graphJSON, ticker=ticker, total_count=total_count, normal_count=normal_count, anomaly_count=anomaly_count)
+    return render_template('index.html', graphJSON=graphJSON, ticker=ticker, period=period, interval=interval, total_count=total_count, normal_count=normal_count, anomaly_count=anomaly_count)
 
 if __name__ == '__main__':
     app.run(debug=True)
