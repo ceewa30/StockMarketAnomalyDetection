@@ -1,46 +1,61 @@
-# Stock Market Anomaly Detection
+# Stock Market Anomaly Detection Dashboard
 
-Data Collection: Use yfinance to download historical adjusted close prices.
-Model Training: Use sklearn.ensemble.IsolationForest. The contamination parameter defines the expected proportion of outliers in the data (e.g., 0.01 for 1%).
-Detection: The model returns 1 for normal points and -1 for anomalies.
+A real-time financial data visualization tool that uses Machine Learning to identify price outliers and market anomalies. Built with Flask, Scikit-Learn, and Plotly.
 
+# 🚀 Overview
 
-Objective 	            Typical Period	        Typical Interval
+Financial markets move fast, and manual analysis often misses sudden, irregular price movements. This project automates the detection of "black swan" events or potential market manipulations by training an Isolation Forest model on live ticker data.
+Key Features
+Live Data Fetching: Integration with yfinance for up-to-the-minute stock data.
+ML-Powered Detection: Uses an Unsupervised Learning approach (Isolation Forest) to label anomalies without needing historical labels.
+Dynamic Controls: Users can toggle between 1-minute to 1-month intervals and 1-day to 10-year periods.
+Interactive UI: Fully responsive Plotly charts with hover-tooltips for precise price analysis.
+Smart Validation: Built-in JavaScript logic to prevent API errors based on Yahoo Finance data availability limits.
 
-Flash Crash Detection	30–60 Minutes	        1–5 Seconds
-Day Trading Setup	    1–5 Days	            5–15 Minutes
-Swing Trading/Risk	    30–90 Days	            Daily (EOD)
-Structural/Calendar	    1–5 Years	            Daily or Monthly
+# 🛠️ Tech Stack
 
+Backend: Python, Flask
+Machine Learning: Scikit-Learn (Isolation Forest)
+Data Science: Pandas, NumPy
+API: yfinance (Yahoo Finance)
+Frontend: HTML5, CSS3, JavaScript, Plotly.js
 
-# Period 1 and 5 Days
+# 📦 Installation & Setup
 
-Interval = 1 min , 2 min, 5 min, 15 min, 30 min, 60 min, 90 min, 1 hour, 1 Day
+Clone the repository:
+bash
+git clone https://github.com
+cd StockMarketAnomalyDetection
+Use code with caution.
 
-# Period 1 Month
+# Create a Virtual Environment:
 
-Interval = 2 min, 5 min, 15 min, 30 min, 60 min, 90 min, 1 hour, 1 Day, 1 week, 1 month
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+Use code with caution.
 
-# Period 3 Month
+# Install Dependencies:
 
-Interval = 60 min, 1 hour, 1 Day, 1 week, 1 month, 3 month
+pip install flask pandas yfinance scikit-learn plotly numpy
+Use code with caution.
 
-# Period 6 Month
+# Run the Application:
 
-Interval = 60 min, 1 hour, 1 Day, 1 week, 1 month, 3 month
+python app.py
+Use code with caution.
 
-# Period 1 Year
+Open your browser and navigate to http://127.0.0.1:5000.
 
-Interval = 60 min, 1 hour, 1 Day, 1 week, 1 month, 3 month
+# 🔍 How it Works
 
-# Period 3 Year
+The application follows a 3-step pipeline:
+Data Ingestion: Standardizes the complex MultiIndex DataFrames returned by the Yahoo Finance API.
+Anomaly Scoring: The IsolationForest algorithm isolates observations by randomly selecting a feature and then randomly selecting a split value between the maximum and minimum values of the selected feature.
+Visualization: Data is flattened into 1D NumPy arrays and injected into a Plotly.js template for high-performance rendering.
 
-Interval = 1 Day, 1 week, 1 month, 3 month
+# 🤝 Contributing
 
-# Period 5 Year
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
-Interval = 1 Day, 1 week, 1 month, 3 month
-
-# Period 10 Year
-
-Interval = 1 Day, 1 week, 1 month, 3 month
+Author: Sivakumar
+LinkedIn: [Your LinkedIn Link]
