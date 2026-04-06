@@ -26,7 +26,18 @@ def get_anomaly_data(ticker, period, interval):
 
     # 2. Detect Anomalies (using Close price)
     model = IsolationForest(contamination=0.01, random_state=42)
+
+    #This returns the "difference" from normal behavior
+    # Lower values indicate more anomalous points, while higher values indicate more normal points.
+
     df['anomaly'] = model.fit_predict(close_values)
+
+    # Use '1' because scikit-learn uses 1 for normal points before you map them
+    normal_points = df[df['anomaly'] == 1]['Close']
+    normal_avg = normal_points.mean()
+
+    # Calculate the difference
+    df['diff_from_normal'] = df['Close'] - normal_avg
 
     df['anomaly'] = df['anomaly'].map({1: '0', -1: '1'})
 
@@ -56,6 +67,10 @@ def get_anomaly_data(ticker, period, interval):
     fig.add_trace(go.Scatter(
         x=x_anomaly, y=y_anomaly.tolist(),
         mode='markers', name='Anomaly',
+        customdata=anomalies['diff_from_normal'].values.tolist(),
+        hovertemplate="<b>Date:</b> %{x}<br>" +
+                    "<b>Price:</b> %{y:.2f}<br>" +
+                    "<b>Diff from Avg:</b> %{customdata:.2f}<extra></extra>",
         marker=dict(color='red', size=10, symbol='x')
     ))
 
