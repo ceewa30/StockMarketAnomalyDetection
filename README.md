@@ -58,4 +58,7 @@ Visualization: Data is flattened into 1D NumPy arrays and injected into a Plotly
 Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
 Author: Sivakumar
-LinkedIn: [Your LinkedIn Link]
+
+LinkedIn: linkedin.com/in/sivakumar-santhalingam
+
+
